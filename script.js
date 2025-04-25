@@ -70,7 +70,7 @@ function handleSubmit(e) {
     };
     
     // Google 스프레드시트 웹 앱 URL - 웹 앱 배포 후 이 URL을 업데이트하세요
-    const scriptURL = 'https://script.google.com/macros/s/여기에_배포_후_받는_웹앱_URL을_입력하세요/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzax_yTGcQ0rqweC5g0qgpFUf_qRQLVPA0qhO8BvXABZrM-eVx1-2xW1aBYJPLNo1jMNQ/exec';
     
     // 로딩 상태 표시
     const originalBtnText = submitBtn.innerHTML;
