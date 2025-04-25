@@ -22,6 +22,35 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // 모달 닫기 기능 추가
+    const modal = document.getElementById('submissionModal');
+    const closeBtn = modal ? modal.querySelector('.close') : null;
+    const confirmBtn = modal ? document.getElementById('closeModal') : null;
+    
+    // X 버튼으로 모달 닫기
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            console.log('Close button clicked');
+            modal.style.display = 'none';
+        });
+    }
+    
+    // 확인 버튼으로 모달 닫기
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function() {
+            console.log('Confirm button clicked');
+            modal.style.display = 'none';
+        });
+    }
+    
+    // 모달 바깥 영역 클릭 시 닫기 (선택 사항)
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            console.log('Outside modal clicked');
+            modal.style.display = 'none';
+        }
+    });
 });
 
 function handleSubmit(e) {
@@ -57,9 +86,9 @@ function handleSubmit(e) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(payload),
-        mode: 'no-cors' // 이 줄 추가 - CORS 에러 우회
+        mode: 'no-cors' // CORS 에러 우회
     })
-    .then(() => { // 응답 파싱 제거 - no-cors 모드에서는 응답 내용 접근 불가
+    .then(() => { // no-cors 모드에서는 응답 내용 접근 불가
         console.log('요청 완료');
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
@@ -125,5 +154,12 @@ function showModal() {
     const modal = document.getElementById('submissionModal');
     if (modal) {
         modal.style.display = 'flex';
+        
+        // ESC 키로 모달 닫기 (선택 사항)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.style.display === 'flex') {
+                modal.style.display = 'none';
+            }
+        }, {once: true});
     }
 }
