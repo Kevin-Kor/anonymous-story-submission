@@ -4,7 +4,7 @@ function handleSubmit(e) {
     if (!validateForm()) {
         return;
     }
-
+    
     const payload = {
         title: document.getElementById('title').value.trim(),
         content: document.getElementById('content').value.trim(),
@@ -13,19 +13,20 @@ function handleSubmit(e) {
         gender: document.getElementById('gender').value,
         region: document.getElementById('region').value
     };
-
-    const formData = new FormData();
-    formData.append('payload', JSON.stringify(payload)); // ✅ 핵심: json을 payload로 넣기
-
+    
+    // FormData 대신 직접 JSON으로 전송
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzzJNao3lOEqBdtAT5aGnnpcSMTudLY8Fpan2P96OiAfAjmxIdKgMzDHKm8uD4dPBuZUw/exec';
-
+    
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 제출 중...';
     submitBtn.disabled = true;
-
+    
     fetch(scriptURL, {
         method: 'POST',
-        body: formData  // ✅ FormData만 사용, headers 제거
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
