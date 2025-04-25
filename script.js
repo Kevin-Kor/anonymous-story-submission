@@ -33,7 +33,7 @@ function handleSubmit(e) {
     };
     
     // 직접 JSON으로 전송
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzzJNao3lOEqBdtAT5aGnnpcSMTudLY8Fpan2P96OiAfAjmxIdKgMzDHKm8uD4dPBuZUw/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzNB5K7R-FtGryfHpjFrjPdiA6KohbqwNvlhIcIRQlOJpiyfXiefi_TUUJBA2WUG4VYRQ/exec';
     
     const submitBtn = document.getElementById('submitBtn');
     const originalBtnText = submitBtn.innerHTML;
