@@ -15,7 +15,7 @@ function updateCharCount() {
     const currentLength = contentTextarea.value.length;
     charCount.textContent = currentLength;
     
-// 제한에 가까워지면 색상 변경
+    // 제한에 가까워지면 색상 변경
     if (currentLength > 900) {
         charCount.style.color = 'var(--danger-color)';
     } else if (currentLength > 700) {
@@ -58,10 +58,7 @@ function handleSubmit(e) {
         return;
     }
     
-    // 실제 애플리케이션에서는 여기서:
-    // 1. 폼 데이터 수집
-    // 2. 서버로 전송
-    
+    // 폼 데이터 수집
     const formData = new FormData(storyForm);
     const submissionData = {
         title: formData.get('title'),
@@ -72,21 +69,54 @@ function handleSubmit(e) {
         region: formData.get('region')
     };
     
-    // 데모 목적으로 콘솔에 로그
-    console.log('폼 제출:', submissionData);
+    // Google 스프레드시트 웹 앱 URL - 웹 앱 배포 후 이 URL을 업데이트하세요
+    const scriptURL = 'https://script.google.com/macros/s/여기에_배포_후_받는_웹앱_URL을_입력하세요/exec';
     
-    // 성공 모달 표시
-    showModal();
+    // 로딩 상태 표시
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 제출 중...';
+    submitBtn.disabled = true;
     
-    // 폼 초기화
-    storyForm.reset();
-    charCount.textContent = '0';
-    charCount.style.color = 'var(--gray-600)';
-    
-    // 태그 스타일 초기화
-    tagItems.forEach(item => {
-        const checkbox = item.querySelector('input[type="checkbox"]');
-        updateTagStyle(checkbox, item);
+    // 구글 시트로 데이터 전송
+    fetch(scriptURL, {
+        method: 'POST',
+        body: JSON.stringify(submissionData),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        mode: 'cors'
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('성공:', data);
+        
+        // 버튼 상태 복원
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        
+        // 성공 모달 표시
+        showModal();
+        
+        // 폼 초기화
+        storyForm.reset();
+        charCount.textContent = '0';
+        charCount.style.color = 'var(--gray-600)';
+        
+        // 태그 스타일 초기화
+        tagItems.forEach(item => {
+            const checkbox = item.querySelector('input[type="checkbox"]');
+            updateTagStyle(checkbox, item);
+        });
+    })
+    .catch(error => {
+        console.error('오류:', error);
+        
+        // 버튼 상태 복원
+        submitBtn.innerHTML = originalBtnText;
+        submitBtn.disabled = false;
+        
+        // 오류 알림 표시
+        showAlert('제보 전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.');
     });
 }
 
