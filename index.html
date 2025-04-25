@@ -4,171 +4,202 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>익명 사연 제보</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>익명 사연 제보</h1>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="container">
+                <h1><i class="fas fa-feather-alt"></i> 익명 사연 제보</h1>
+                <p class="header-description">당신의 이야기를 공유해보세요</p>
+            </div>
         </header>
 
-        <section class="guidelines">
-            <h2>제보 안내</h2>
-            <div class="notice-box">
-                <p>• 제보는 익명으로 처리되며, 개인정보는 수집되지 않습니다.</p>
-                <p>• 내용은 운영자의 판단에 따라 선별되어 게시됩니다.</p>
-                <p>• 부적절한 내용(비방, 욕설 등)은 게시되지 않습니다.</p>
-            </div>
-        </section>
-
-        <section class="posting-criteria">
-            <h2>게시 기준</h2>
-            <div class="criteria-container">
-                <div class="criteria-column">
-                    <h3>게시 가능한 사연</h3>
-                    <ul>
-                        <li>익명성이 보장된 사연</li>
-                        <li>공감과 소통을 할 수 있는 내용</li>
-                        <li>고민 해결에 도움이 되는 건설적인 이야기</li>
-                        <li>직장에서 겪은 부당한 일에 대한 고민</li>
-                        <li>연애나 우정에서 생긴 갈등 이야기</li>
-                        <li>학교 생활 속 스트레스나 에피소드</li>
-                        <li>가족과의 관계에서 오는 감정</li>
-                    </ul>
+        <main class="container">
+            <section class="card guidelines-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-info-circle"></i> 제보 안내</h2>
                 </div>
-                <div class="criteria-column">
-                    <h3>게시 불가 사연</h3>
-                    <ul>
-                        <li>개인정보, 비방, 욕설, 차별적 발언이 포함된 내용</li>
-                        <li>폭력적/성적 표현이 포함된 내용</li>
-                        <li>특정인을 공격하거나 논란을 조장하려는 의도가 있는 내용</li>
-                        <li>특정인을 비방하는 내용</li>
-                        <li>욕설이나 차별적인 단어가 포함된 글</li>
-                        <li>개인 전화번호나 이름이 드러난 경우</li>
-                    </ul>
+                <div class="card-body">
+                    <div class="notice-box">
+                        <p><i class="fas fa-check-circle"></i> 제보는 익명으로 처리되며, 개인정보는 수집되지 않습니다.</p>
+                        <p><i class="fas fa-check-circle"></i> 내용은 운영자의 판단에 따라 선별되어 게시됩니다.</p>
+                        <p><i class="fas fa-check-circle"></i> 부적절한 내용(비방, 욕설 등)은 게시되지 않습니다.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="notice-box operation-policy">
-                <h3>운영 방침</h3>
-                <ul>
-                    <li>제보는 운영자가 선별하며, 기준에 맞지 않으면 게시되지 않습니다.</li>
-                    <li>게시된 사연의 책임은 제보자에게 있습니다.</li>
-                    <li>사연의 진위 여부는 확인하지 않습니다.</li>
-                </ul>
-            </div>
-        </section>
+            </section>
 
-        <section class="submission-form">
-            <h2>사연 제보하기</h2>
-            <form id="storyForm">
-                <div class="form-group">
-                    <h3>필수 항목</h3>
-                    
-                    <div class="form-field">
-                        <label for="title">제목</label>
-                        <input type="text" id="title" name="title" required>
-                        <p class="field-description">제보 내용을 간단히 요약해주세요. (예: "직장 고민", "친구와의 갈등")</p>
+            <section class="card criteria-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-clipboard-list"></i> 게시 기준</h2>
+                </div>
+                <div class="card-body">
+                    <div class="criteria-grid">
+                        <div class="criteria-column accepted">
+                            <div class="criteria-header">
+                                <h3><i class="fas fa-check"></i> 게시 가능한 사연</h3>
+                            </div>
+                            <ul>
+                                <li>익명성이 보장된 사연</li>
+                                <li>공감과 소통을 할 수 있는 내용</li>
+                                <li>고민 해결에 도움이 되는 건설적인 이야기</li>
+                                <li>직장에서 겪은 부당한 일에 대한 고민</li>
+                                <li>연애나 우정에서 생긴 갈등 이야기</li>
+                                <li>학교 생활 속 스트레스나 에피소드</li>
+                                <li>가족과의 관계에서 오는 감정</li>
+                            </ul>
+                        </div>
+                        <div class="criteria-column rejected">
+                            <div class="criteria-header">
+                                <h3><i class="fas fa-times"></i> 게시 불가 사연</h3>
+                            </div>
+                            <ul>
+                                <li>개인정보, 비방, 욕설, 차별적 발언이 포함된 내용</li>
+                                <li>폭력적/성적 표현이 포함된 내용</li>
+                                <li>특정인을 공격하거나 논란을 조장하려는 의도가 있는 내용</li>
+                                <li>특정인을 비방하는 내용</li>
+                                <li>욕설이나 차별적인 단어가 포함된 글</li>
+                                <li>개인 전화번호나 이름이 드러난 경우</li>
+                            </ul>
+                        </div>
                     </div>
                     
-                    <div class="form-field">
-                        <label for="content">내용</label>
-                        <textarea id="content" name="content" maxlength="1000" required></textarea>
-                        <p class="field-description">여러분의 이야기를 자세히 작성해주세요. (최대 1000자)</p>
-                        <div class="char-count"><span id="charCount">0</span>/1000</div>
+                    <div class="notice-box operation-policy">
+                        <h3><i class="fas fa-gavel"></i> 운영 방침</h3>
+                        <ul>
+                            <li>제보는 운영자가 선별하며, 기준에 맞지 않으면 게시되지 않습니다.</li>
+                            <li>게시된 사연의 책임은 제보자에게 있습니다.</li>
+                            <li>사연의 진위 여부는 확인하지 않습니다.</li>
+                        </ul>
                     </div>
-                    
-                    <div class="form-field">
-                        <label>태그</label>
-                        <div class="tags-container">
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag1" name="tags" value="직장">
-                                <label for="tag1">#직장</label>
+                </div>
+            </section>
+
+            <section class="card submission-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-paper-plane"></i> 사연 제보하기</h2>
+                </div>
+                <div class="card-body">
+                    <form id="storyForm">
+                        <div class="form-section">
+                            <h3 class="section-title">필수 항목</h3>
+                            
+                            <div class="form-group">
+                                <label for="title">제목</label>
+                                <input type="text" id="title" name="title" placeholder="제목을 입력해주세요" required>
+                                <p class="field-description">제보 내용을 간단히 요약해주세요. (예: "직장 고민", "친구와의 갈등")</p>
                             </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag2" name="tags" value="연애">
-                                <label for="tag2">#연애</label>
+                            
+                            <div class="form-group">
+                                <label for="content">내용</label>
+                                <textarea id="content" name="content" maxlength="1000" placeholder="여러분의 이야기를 자세히 작성해주세요" required></textarea>
+                                <div class="textarea-footer">
+                                    <p class="field-description">여러분의 이야기를 자세히 작성해주세요.</p>
+                                    <div class="char-count"><span id="charCount">0</span>/1000</div>
+                                </div>
                             </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag3" name="tags" value="학교">
-                                <label for="tag3">#학교</label>
+                            
+                            <div class="form-group">
+                                <label>태그 <span class="required-note">(하나 이상 선택)</span></label>
+                                <div class="tags-container">
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag1" name="tags" value="직장">
+                                        <label for="tag1"><i class="fas fa-briefcase"></i> #직장</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag2" name="tags" value="연애">
+                                        <label for="tag2"><i class="fas fa-heart"></i> #연애</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag3" name="tags" value="학교">
+                                        <label for="tag3"><i class="fas fa-school"></i> #학교</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag4" name="tags" value="가족">
+                                        <label for="tag4"><i class="fas fa-home"></i> #가족</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag5" name="tags" value="인간관계">
+                                        <label for="tag5"><i class="fas fa-users"></i> #인간관계</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag6" name="tags" value="건강">
+                                        <label for="tag6"><i class="fas fa-heartbeat"></i> #건강</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag7" name="tags" value="취미">
+                                        <label for="tag7"><i class="fas fa-palette"></i> #취미</label>
+                                    </div>
+                                    <div class="tag-item">
+                                        <input type="checkbox" id="tag8" name="tags" value="기타">
+                                        <label for="tag8"><i class="fas fa-ellipsis-h"></i> #기타</label>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag4" name="tags" value="가족">
-                                <label for="tag4">#가족</label>
-                            </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag5" name="tags" value="인간관계">
-                                <label for="tag5">#인간관계</label>
-                            </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag6" name="tags" value="건강">
-                                <label for="tag6">#건강</label>
-                            </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag7" name="tags" value="취미">
-                                <label for="tag7">#취미</label>
-                            </div>
-                            <div class="tag-item">
-                                <input type="checkbox" id="tag8" name="tags" value="기타">
-                                <label for="tag8">#기타</label>
+                            
+                            <div class="form-group consent-field">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="consent" name="consent" required>
+                                    <label for="consent">이 내용이 익명으로 게시되는 것에 동의합니다</label>
+                                </div>
                             </div>
                         </div>
-                        <p class="field-description">사연과 관련된 주제를 선택해주세요. (예: #직장, #연애, #학교)</p>
-                    </div>
-                    
-                    <div class="form-field consent-field">
-                        <input type="checkbox" id="consent" name="consent" required>
-                        <label for="consent">이 내용이 익명으로 게시되는 것에 동의합니다.</label>
-                    </div>
+                        
+                        <div class="form-section">
+                            <h3 class="section-title">선택 항목</h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="age">연령대</label>
+                                    <select id="age" name="age">
+                                        <option value="">선택 안함</option>
+                                        <option value="10대">10대</option>
+                                        <option value="20대">20대</option>
+                                        <option value="30대 이상">30대 이상</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="gender">성별</label>
+                                    <select id="gender" name="gender">
+                                        <option value="">선택 안함</option>
+                                        <option value="남성">남성</option>
+                                        <option value="여성">여성</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="region">지역</label>
+                                    <select id="region" name="region">
+                                        <option value="">선택 안함</option>
+                                        <option value="서울">서울</option>
+                                        <option value="경기">경기</option>
+                                        <option value="지방">지방</option>
+                                        <option value="기타">기타</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="submit-container">
+                            <button type="submit" id="submitBtn"><i class="fas fa-paper-plane"></i> 제보하기</button>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="form-group">
-                    <h3>선택 항목</h3>
-                    
-                    <div class="form-field">
-                        <label for="age">연령대</label>
-                        <select id="age" name="age">
-                            <option value="">선택 안함</option>
-                            <option value="10대">10대</option>
-                            <option value="20대">20대</option>
-                            <option value="30대 이상">30대 이상</option>
-                        </select>
-                        <p class="field-description">제보자의 연령대를 선택해주세요.</p>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="gender">성별</label>
-                        <select id="gender" name="gender">
-                            <option value="">선택 안함</option>
-                            <option value="남성">남성</option>
-                            <option value="여성">여성</option>
-                            <option value="기타">기타</option>
-                        </select>
-                        <p class="field-description">제보자의 성별을 선택해주세요.</p>
-                    </div>
-                    
-                    <div class="form-field">
-                        <label for="region">지역</label>
-                        <select id="region" name="region">
-                            <option value="">선택 안함</option>
-                            <option value="서울">서울</option>
-                            <option value="경기">경기</option>
-                            <option value="지방">지방</option>
-                            <option value="기타">기타</option>
-                        </select>
-                        <p class="field-description">제보자의 지역을 선택해주세요.</p>
-                    </div>
-                </div>
-                
-                <div class="submit-container">
-                    <button type="submit" id="submitBtn">제보하기</button>
-                </div>
-            </form>
-        </section>
+            </section>
+        </main>
         
         <div id="submissionModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
+                <div class="modal-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
                 <h2>제보가 완료되었습니다</h2>
                 <p>소중한 사연을 보내주셔서 감사합니다.</p>
                 <p>운영자 검토 후 게시될 예정입니다.</p>
@@ -178,7 +209,9 @@
     </div>
     
     <footer>
-        <p>&copy; 2023 익명 사연 제보 페이지</p>
+        <div class="container">
+            <p>&copy; 2023 익명 사연 제보 페이지</p>
+        </div>
     </footer>
     
     <script src="script.js"></script>
