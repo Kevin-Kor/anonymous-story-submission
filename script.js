@@ -1,20 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // DOM이 로드된 후 실행되도록 이벤트 리스너 추가
+document.addEventListener('DOMContentLoaded', function () {
     const storyForm = document.getElementById('storyForm');
     const submitBtn = document.getElementById('submitBtn');
     const charCount = document.getElementById('charCount');
     const tagItems = document.querySelectorAll('.tag-item');
-    
+
     if (storyForm) {
         storyForm.addEventListener('submit', handleSubmit);
         console.log('Form submit event listener added');
     } else {
         console.error('Form element not found');
     }
-    
-    // 태그 항목 클릭 시 체크박스 토글 기능 추가
+
     tagItems.forEach(item => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             const checkbox = this.querySelector('input[type="checkbox"]');
             if (checkbox) {
                 checkbox.checked = !checkbox.checked;
@@ -22,45 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // 모달 닫기 기능 추가
-    const modal = document.getElementById('submissionModal');
-    const closeBtn = modal ? modal.querySelector('.close') : null;
-    const confirmBtn = modal ? document.getElementById('closeModal') : null;
-    
-    // X 버튼으로 모달 닫기
-    if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            console.log('Close button clicked');
-            modal.style.display = 'none';
-        });
-    }
-    
-    // 확인 버튼으로 모달 닫기
-    if (confirmBtn) {
-        confirmBtn.addEventListener('click', function() {
-            console.log('Confirm button clicked');
-            modal.style.display = 'none';
-        });
-    }
-    
-    // 모달 바깥 영역 클릭 시 닫기 (선택 사항)
-    window.addEventListener('click', function(event) {
-        if (event.target === modal) {
-            console.log('Outside modal clicked');
-            modal.style.display = 'none';
-        }
-    });
 });
 
 function handleSubmit(e) {
-    console.log('Form submit triggered'); // 디버깅용
-    e.preventDefault(); // 기본 제출 동작 방지
-    
-    if (!validateForm()) {
-        return;
-    }
-    
+    console.log('Form submit triggered');
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
     const payload = {
         title: document.getElementById('title').value.trim(),
         content: document.getElementById('content').value.trim(),
@@ -69,26 +36,23 @@ function handleSubmit(e) {
         gender: document.getElementById('gender').value,
         region: document.getElementById('region').value
     };
-    
-    // 직접 JSON으로 전송
+
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzNB5K7R-FtGryfHpjFrjPdiA6KohbqwNvlhIcIRQlOJpiyfXiefi_TUUJBA2WUG4VYRQ/exec';
-    
+
     const submitBtn = document.getElementById('submitBtn');
     const originalBtnText = submitBtn.innerHTML;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 제출 중...';
     submitBtn.disabled = true;
-    
-    console.log('Sending data:', payload); // 디버깅용
-    
+
+    console.log('Sending data:', payload);
+
     fetch(scriptURL, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
-        mode: 'no-cors' // CORS 에러 우회
+        mode: 'no-cors'
     })
-    .then(() => { // no-cors 모드에서는 응답 내용 접근 불가
+    .then(() => {
         console.log('요청 완료');
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
@@ -114,52 +78,78 @@ function handleSubmit(e) {
     });
 }
 
-// Form 유효성 검사 함수
 function validateForm() {
     const title = document.getElementById('title').value.trim();
     const content = document.getElementById('content').value.trim();
     const tags = document.querySelectorAll('input[name="tags"]:checked');
     const consent = document.getElementById('consent').checked;
-    
+
     if (!title) {
         showAlert('제목을 입력해주세요.');
         return false;
     }
-    
+
     if (!content) {
         showAlert('내용을 입력해주세요.');
         return false;
     }
-    
+
     if (tags.length === 0) {
         showAlert('태그를 하나 이상 선택해주세요.');
         return false;
     }
-    
+
     if (!consent) {
         showAlert('익명 게시 동의에 체크해주세요.');
         return false;
     }
-    
+
     return true;
 }
 
-// Alert 표시 함수
 function showAlert(message) {
     alert(message);
 }
 
-// Modal 표시 함수
 function showModal() {
     const modal = document.getElementById('submissionModal');
-    if (modal) {
-        modal.style.display = 'flex';
-        
-        // ESC 키로 모달 닫기 (선택 사항)
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape' && modal.style.display === 'flex') {
-                modal.style.display = 'none';
-            }
-        }, {once: true});
+    if (!modal) return;
+
+    modal.style.display = 'flex';
+
+    // 닫기 버튼 (.close 또는 비슷한 클래스 포함 가능)
+    const closeBtn = modal.querySelector('.close, [class*="close"], svg, .modal-close');
+    if (closeBtn) {
+        closeBtn.onclick = function () {
+            console.log('X 버튼 클릭됨');
+            modal.style.display = 'none';
+        };
     }
+
+    // 확인 버튼
+    const confirmBtn = document.getElementById('closeModal') ||
+                       modal.querySelector('button') ||
+                       modal.querySelector('.confirm-btn, .btn-primary, .modal-confirm');
+    if (confirmBtn) {
+        confirmBtn.onclick = function () {
+            console.log('확인 버튼 클릭됨');
+            modal.style.display = 'none';
+        };
+    }
+
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.style.display === 'flex') {
+            console.log('ESC 눌러서 닫기');
+            modal.style.display = 'none';
+        }
+    }, { once: true });
+
+    // 모달 바깥 클릭 시 닫기
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            console.log('모달 외부 클릭됨');
+            modal.style.display = 'none';
+        }
+    };
 }
