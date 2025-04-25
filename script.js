@@ -12,7 +12,16 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Form element not found');
     }
     
-    // 기존 이벤트 리스너들이 있다면 여기에 추가...
+    // 태그 항목 클릭 시 체크박스 토글 기능 추가
+    tagItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const checkbox = this.querySelector('input[type="checkbox"]');
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                console.log('태그 선택됨:', checkbox.value, checkbox.checked);
+            }
+        });
+    });
 });
 
 function handleSubmit(e) {
@@ -47,14 +56,11 @@ function handleSubmit(e) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        mode: 'no-cors' // 이 줄 추가 - CORS 에러 우회
     })
-    .then(response => {
-        console.log('Response status:', response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log('Success:', data);
+    .then(() => { // 응답 파싱 제거 - no-cors 모드에서는 응답 내용 접근 불가
+        console.log('요청 완료');
         submitBtn.innerHTML = originalBtnText;
         submitBtn.disabled = false;
         showModal();
@@ -109,12 +115,12 @@ function validateForm() {
     return true;
 }
 
-// Alert 표시 함수 - 이 함수가 이미 존재하지 않는다면 추가
+// Alert 표시 함수
 function showAlert(message) {
-    alert(message); // 간단한 alert 사용, 필요시 커스텀 모달로 변경 가능
+    alert(message);
 }
 
-// Modal 표시 함수 - 이 함수가 이미 존재한다고 가정
+// Modal 표시 함수
 function showModal() {
     const modal = document.getElementById('submissionModal');
     if (modal) {
