@@ -5,7 +5,6 @@ function handleSubmit(e) {
         return;
     }
 
-    // 수동으로 FormData 생성해서 payload 붙이기
     const payload = {
         title: document.getElementById('title').value.trim(),
         content: document.getElementById('content').value.trim(),
@@ -16,7 +15,7 @@ function handleSubmit(e) {
     };
 
     const formData = new FormData();
-    formData.append('payload', JSON.stringify(payload));  // ✅ 여기가 핵심!
+    formData.append('payload', JSON.stringify(payload)); // ✅ 핵심: json을 payload로 넣기
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzzJNao3lOEqBdtAT5aGnnpcSMTudLY8Fpan2P96OiAfAjmxIdKgMzDHKm8uD4dPBuZUw/exec';
 
@@ -26,8 +25,7 @@ function handleSubmit(e) {
 
     fetch(scriptURL, {
         method: 'POST',
-        body: formData  // ✅ JSON이 아니라 FormData!
-        // ❌ headers 설정 없음!
+        body: formData  // ✅ FormData만 사용, headers 제거
     })
     .then(response => response.json())
     .then(data => {
